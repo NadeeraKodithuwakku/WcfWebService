@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shared.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace DistributorService.Core
 {
     public interface IWorkOrderManager
     {
-        void ValidateWorkOrder();
+        List<ValidationError> ValidateWorkOrder(WorkOrderRequest request);
     }
 }

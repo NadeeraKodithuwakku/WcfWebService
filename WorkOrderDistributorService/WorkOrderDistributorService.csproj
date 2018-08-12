@@ -92,7 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IoCContainer.cs" />
-    <Compile Include="Validation\WorkOrderDetailsValidation.cs" />
     <Compile Include="WorkOrderDistributorService.svc.cs">
       <DependentUpon>WorkOrderDistributorService.svc</DependentUpon>
     </Compile>

@@ -19,28 +19,16 @@ namespace WorkOrderDistributorService
        
         public WorkOrderResponse SaveWorkOrder(WorkOrderRequest workOrderRequest)
         {
-            var details = workOrderRequest.WorkOrderDetails;
             var response = new WorkOrderResponse();
+            var validations = this.workOrderManager.ValidateWorkOrder(workOrderRequest);
 
-            var isValidDistributorNumber = WorkOrderDetailsValidation.IsValidDistibutorNumber(details.DistributorNumber);
-            var isValidWorkOrderNumber = WorkOrderDetailsValidation.IsValidWorkOrderNumber(details.WorkOrderNumber);
+            if (validations.Count > 0)
+            {
+                response.ValidationErrors = validations;
+                response.Status = Status.FAILED_SAVING_ORDER;
+            }
 
-            if(isValidDistributorNumber)
-            {
-                if (isValidWorkOrderNumber)
-                {
-                    response.Status = Status.SAVED_SUCCESS;
-                    //insert to DB
-                }
-                else
-                {
-                    response.Status = Status.WORK_ORDER_IS_REQUIRED;
-                }
-            }
-            else
-            {
-                response.Status = Status.DISTRIBUTOR_IS_REQUIRED;
-            }
+           
             return response;
         }
 

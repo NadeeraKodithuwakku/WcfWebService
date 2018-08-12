@@ -1,16 +1,23 @@
-﻿using System;
+﻿using Shared.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WorkOrderDistributorService.Validation;
 
 namespace DistributorService.Core
 {
     public class WorkOrderManager : IWorkOrderManager
     {
-        public void ValidateWorkOrder()
+        public List<ValidationError> ValidateWorkOrder(WorkOrderRequest request)
         {
-            throw new NotImplementedException();
+            List<ValidationError> validations = new List<ValidationError>();
+            var isValidDistributorNumber = WorkOrderDetailsValidation.IsValidDistibutorNumber(request.WorkOrderDetails.DistributorNumber);
+            var isValidWorkOrderNumber = WorkOrderDetailsValidation.IsValidWorkOrderNumber(request.WorkOrderDetails.WorkOrderNumber);
+
+            
+            return validations;
         }
     }
 }
