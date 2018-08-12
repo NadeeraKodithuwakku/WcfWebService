@@ -23,5 +23,6 @@ namespace WorkOrderDistributorService
 
                 return _container;
             }
-        }    
+        }
+    }
 }
