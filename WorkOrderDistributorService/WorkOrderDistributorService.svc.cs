@@ -2,6 +2,7 @@
 using Shared;
 using Shared.Entities;
 using Unity;
+using WorkOrderData;
 using WorkOrderDistributorService.Validation;
 
 namespace WorkOrderDistributorService
@@ -11,10 +12,12 @@ namespace WorkOrderDistributorService
     public class WorkOrderDistributorService : IWorkOrderDistributorService
     {
         private readonly IWorkOrderManager workOrderManager;
+        private readonly IDatabaseManager databaseManager;
 
         public WorkOrderDistributorService()
         {
             workOrderManager = IoCContainer.Container.Resolve<IWorkOrderManager>();
+            databaseManager = IoCContainer.Container.Resolve<IDatabaseManager>();
         }
        
         public WorkOrderResponse SaveWorkOrder(WorkOrderRequest workOrderRequest)
@@ -26,6 +29,11 @@ namespace WorkOrderDistributorService
             {
                 response.ValidationErrors = validations;
                 response.Status = Status.FAILED_SAVING_ORDER;
+            }
+            else
+            {
+                databaseManager.AddWorkDetails(workOrderRequest.WorkOrderDetails);
+                response.Status = Status.SAVED_SUCCESS;
             }
 
            

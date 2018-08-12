@@ -67,4 +67,7 @@
   <ItemGroup>
     <RefactorLog Include="DistributorService.OrderDB.refactorlog" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="DistributorService.OrderDB.publish.xml" />
+  </ItemGroup>
 </Project>

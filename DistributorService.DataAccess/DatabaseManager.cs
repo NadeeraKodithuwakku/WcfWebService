@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace WorkOrderData
 {
-    public class DatabaseManager
+    public class DatabaseManager : IDatabaseManager
     {
         public List<WorkOrderDetails> Read()
         {

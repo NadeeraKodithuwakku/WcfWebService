@@ -115,6 +115,10 @@
       <Project>{EC130BEE-3F3D-4107-87C1-A1EBC8D5419A}</Project>
       <Name>DistributorService.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DistributorService.DataAccess\DistributorService.DataAccess.csproj">
+      <Project>{06894B38-C5ED-476E-878E-275EC013099D}</Project>
+      <Name>DistributorService.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{ac7a1b6a-8ab9-4fd4-ad13-bffaa66f7667}</Project>
       <Name>Shared</Name>

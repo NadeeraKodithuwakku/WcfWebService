@@ -1,5 +1,6 @@
 ﻿using DistributorService.Core;
 using Unity;
+using WorkOrderData;
 
 namespace WorkOrderDistributorService
 {
@@ -18,6 +19,7 @@ namespace WorkOrderDistributorService
                     {
                         _container = new UnityContainer();
                         _container.RegisterType<IWorkOrderManager, WorkOrderManager>();
+                        _container.RegisterType<IDatabaseManager, DatabaseManager>();
                     }
                 }
 
