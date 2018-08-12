@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shared.Entities
+namespace DistributorService.Core
 {
-    public class ReturnStatus
+    public interface IWorkOrderManager
     {
+        void ValidateWorkOrder();
     }
 }

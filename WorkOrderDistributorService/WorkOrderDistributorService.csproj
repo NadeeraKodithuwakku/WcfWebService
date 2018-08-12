@@ -91,6 +91,8 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IoCContainer.cs" />
+    <Compile Include="Validation\WorkOrderDetailsValidation.cs" />
     <Compile Include="WorkOrderDistributorService.svc.cs">
       <DependentUpon>WorkOrderDistributorService.svc</DependentUpon>
     </Compile>
@@ -110,6 +112,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DistributorService.Core\DistributorService.Core.csproj">
+      <Project>{EC130BEE-3F3D-4107-87C1-A1EBC8D5419A}</Project>
+      <Name>DistributorService.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shared\Shared.csproj">
       <Project>{ac7a1b6a-8ab9-4fd4-ad13-bffaa66f7667}</Project>
       <Name>Shared</Name>

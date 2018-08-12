@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
+﻿using DistributorService.Core;
+using Shared;
+using Shared.Entities;
+using Unity;
+using WorkOrderDistributorService.Validation;
 
 namespace WorkOrderDistributorService
 {
@@ -12,22 +10,39 @@ namespace WorkOrderDistributorService
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     public class WorkOrderDistributorService : IWorkOrderDistributorService
     {
-        public string EnterWorkOrder(int value)
+        private readonly IWorkOrderManager workOrderManager;
+
+        public WorkOrderDistributorService()
         {
-            return string.Format("You entered: {0}", value);
+            workOrderManager = IoCContainer.Container.Resolve<IWorkOrderManager>();
+        }
+       
+        public WorkOrderResponse SaveWorkOrder(WorkOrderRequest workOrderRequest)
+        {
+            var details = workOrderRequest.WorkOrderDetails;
+            var response = new WorkOrderResponse();
+
+            var isValidDistributorNumber = WorkOrderDetailsValidation.IsValidDistibutorNumber(details.DistributorNumber);
+            var isValidWorkOrderNumber = WorkOrderDetailsValidation.IsValidWorkOrderNumber(details.WorkOrderNumber);
+
+            if(isValidDistributorNumber)
+            {
+                if (isValidWorkOrderNumber)
+                {
+                    response.Status = Status.SAVED_SUCCESS;
+                    //insert to DB
+                }
+                else
+                {
+                    response.Status = Status.WORK_ORDER_IS_REQUIRED;
+                }
+            }
+            else
+            {
+                response.Status = Status.DISTRIBUTOR_IS_REQUIRED;
+            }
+            return response;
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
-        {
-            if (composite == null)
-            {
-                throw new ArgumentNullException("composite");
-            }
-            if (composite.BoolValue)
-            {
-                composite.StringValue += "Suffix";
-            }
-            return composite;
-        }
     }
 }
